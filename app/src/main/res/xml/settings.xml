@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="실행 설정">
+        <ListPreference
+            android:key="settings_runtime_event"
+            android:title="실행 이벤트 설정"
+            android:defaultValue="device_shake"
+            android:entries="@array/runevent_view"
+            android:entryValues="@array/runevent_code"/>
+        <CheckBoxPreference
+            android:key="settings_runtime_vib"
+            android:title="진동 사용"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="게이밍 모드">
+        <ListPreference
+            android:key="settings_gaming_textcolor"
+            android:title="글씨 색상"
+            android:summary="WHITE"
+            android:defaultValue="#ecf0f1"
+            android:entries="@array/common_color_names"
+            android:entryValues="@array/common_color_codes"/>
+
+        <ListPreference
+            android:key="settings_gaming_bgcolor"
+            android:title="배경 색상"
+            android:summary="BLACK"
+            android:defaultValue="#1f2b38"
+            android:entries="@array/common_color_names"
+            android:entryValues="@array/common_color_codes"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="실행 이벤트">
+        <PreferenceScreen
+            android:title="흔들림 감지 모드">
+            <PreferenceCategory android:title="흔들림 감지 모드">
+                <ListPreference
+                    android:key="settings_shake_sens"
+                    android:title="감도"
+                    android:defaultValue="2"
+                    android:entries="@array/shake_sensitivity_view"
+                    android:entryValues="@array/shake_sensitivity_values"/>
+            </PreferenceCategory>
+        </PreferenceScreen>
+
+        <PreferenceScreen android:title="오버레이 버튼 모드">
+            <PreferenceCategory android:title="오버레이 버튼 모드">
+                <ListPreference
+                    android:key="settings_overlaybtn_bgcolor"
+                    android:title="버튼 색상"
+                    android:summary="WHITE"
+                    android:defaultValue="#1f2b38"
+                    android:entries="@array/common_color_names"
+                    android:entryValues="@array/common_color_codes"/>
+
+                <ListPreference
+                    android:key="settings_overlaybtn_size"
+                    android:title="버튼 크기"
+                    android:summary="ORANGE"
+                    android:defaultValue="2"
+                    android:entries="@array/common_size_names"
+                    android:entryValues="@array/common_size_codes"/>
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,373 @@
+<resources>
+    <string name="app_name">스크린 번역기</string>
+
+    <string name="common_loading">잠깐 기다려주시는거야!</string>
+
+    <string name="common_positive_allow">승인</string>
+    <string name="common_negative_ignore">무시</string>
+    <string name="common_positive_ok">네!</string>
+    <string name="common_negative_no">아니오</string>
+    <string name="common_hello">안녕하세요.</string>
+    <string name="common_retry">다시 시도</string>
+
+    <string name="common_hour">시간</string>
+    <string name="common_min">분</string>
+    <string name="common_sec">초</string>
+    <string name="common_do_start">시작</string>
+    <string name="common_do_stop">중지</string>
+
+    <string name="updater_need_update_title">업데이트 알림</string>
+    <string name="updater_need_update_content">개발자가, 열심히 일해서! 새로운 버전이 나왔습니다.\n새 버전으로 업데이트 할까요?</string>
+    <string name="update_last_version">최신버전 입니다.</string>
+
+    <!-- titles -->
+    <string name="title_bill_activity">사용량 늘리기</string>
+    <string name="title_billog_activity">구매 이력</string>
+    <string name="title_about_activity">대하여</string>
+    <string name="title_settings_activity">환경설정</string>
+
+    <!-- Error message -->
+    <string name="error_msg_title_fatal">Fatal error!</string>
+    <string name="error_msg_title_warning">앗... 이런!</string>
+    <string name="error_msg_title_normal">경고</string>
+    <string name="info_msg_title">안내</string>
+    <string name="error_msg_content_common">오류가 발생했습니다.\n</string>
+
+    <string name="error_msg_content_no_overlay_permission">설정 값에 의하여, 번역기를 실행하려면 오버레이를 허용해야 합니다.\n환경설정으로 이동할까요?</string>
+    <string name="error_msg_content_no_overlay_gaming">게이밍 모드를 활성화 하려면 오버레이를 허용해야 합니다,\n환경 설정으로 이동할까요?</string>
+    <string name="error_msg_content_update_point">경험치 정보를 불러올 수 없습니다!\n앱을 다시 시작 해 보세요.</string>
+    <string name="error_msg_content_update_check_failed">업데이트 정보를 불러올 수 없숩니다.\n나중에 다시 시도하세요.</string>
+    <string name="error_msg_param_error">요청 파라미터 오류!</string>
+    <string name="error_msg_not_support_language">지원하지 않는 언어 입니다.</string>
+    <string name="error_msg_auth_error">인증 오류가 발생했습니다!</string>
+
+    <string name="error_msg_cache_image_error">캐시 이미지 파일을 찾을 수 없습니다.</string>
+    <string name="error_msg_content_gaming_noimage">캡쳐 비트맵 캐시를 찾을 수 없습니다!</string>
+    <string name="error_msg_kakaologin_session_failed">카카오 로그인 세션을 열 수 없습니다!</string>
+
+    <string name="inode_exceeded">일일 사용 횟수를 초과했습니다.\n이용권을 구입하거나, 내일을 기약하도록 하죠.</string>
+
+    <!-- Translate V2 Error Messages -->
+    <string name="error_msg_translate_v2_400">쿼리 매개 변수 중 하나가 없거나 올바르지 않습니다. 다시 시도하기 전에 요청 매개 변수를 수정하십시오.</string>
+    <string name="error_msg_translate_v2_401">요청을 인증 할 수 없습니다. 자격 증명이 지정되고 유효한지 확인하십시오.</string>
+    <string name="error_msg_translate_v2_403">요청이 승인되지 않았습니다. 운영팀에게 문의하십시오.</string>
+    <string name="error_msg_translate_v2_429">발신자가 너무 많은 요청을 보냈습니다.</string>
+    <string name="error_msg_translate_v2_500">예기치 않은 오류가 발생했습니다. 오류가 지속되면 실패한 날짜와 시간, 응답 헤더의 요청 식별자 X-RequestId및 요청 헤더의 클라이언트 식별자를 보고 하십시오 </string>
+    <string name="error_msg_translate_v2_503">서버를 일시적으로 사용할 수 없습니다. 요청을 다시 시도하십시오.</string>
+
+    <string name="error_msg_translate_v2_length_not_match">번역 데이터와 문장 길이가 일치하지 않습니다!</string>
+    <string name="error_msg_translate_v2_gaming_line_overflow">번역할 문장이 너무 많습니다!\n게이밍 번역 대신, 일반 번역을 사용해보세요!</string>
+    <string name="error_msg_translate_v2_auto_detect_blocked">언어 감지를 사용 할 수 없습니다!</string>
+
+
+    <!-- 서버 응답 메세지 -->
+    <string name="http_response_pst01">세션을 인증 할 수 없습니다.</string>
+    <string name="http_response_pst02">내부 서버 오류가 발생했습니다.</string>
+
+    <string name="http_response_pst10">서버에서 잘못된 응답을 반환하였습니다.</string>
+    <string name="http_response_pst11">요청/응답 작업에서 문제가 발생했습니다.</string>
+
+    <string name="http_response_pst20">점검 중 입니다. 공지사항을 참고하세요.</string>
+
+    <!-- 로그인 화면 -->
+    <string name="login_content">스크린 번역기에 돌아오신것을 환영합니다.\n계속 하려면 로그인 해 주세요.</string>
+    <string name="login_connection_error">네트워크에 연결 할 수 없습니다.\n인터넷 연결 상태를 확인하세요.</string>
+
+    <!-- 번역기 화면 -->
+    <string name="translate_editor_non_text">번역할 문장을 입력하세요.</string>
+    <string name="translate_none_text_error">이미지에서 텍스트를 찾을 수 없습니다!</string>
+    <string name="translate_stt_prompt">말씀하세요.</string>
+    <string name="translate_copied">복사 되었습니다.</string>
+    <string name="translate_last_session_error">번역된 문장이 없거나, 마지막 번역 세션이 잘못되었습니다.</string>
+    <string name="translate_auto_not_supported">자동감지를 지원하지 않습니다.</string>
+
+    <!-- Gaming mode overlay -->
+    <string name="gaming_overlay_translate">화면 내 텍스트를 번역하고 있습니다.</string>
+
+    <!-- MediaProjection Activity -->
+    <string name="mediaproj_content">화면 캡쳐를 위해 권한을 허용해주세요.</string>
+    <string name="mediaproj_if_now_show">권한 허용창이 보이지 않으면, 다시 시도를 눌러주세요.</string>
+
+    <!-- System overlay Activity -->
+    <string name="sysoverlay_title">시스템 오버레이 권한을 허용해주세요.</string>
+    <string name="sysoverlay_content">현재 \'게이밍 모드\' 또는 \'오버레이 버튼 모드\' 가 활성화 되어있어 권한 승인 안내창이 표시되었습니다.\n만약 이 권한을 거부하고 싶다면 두 모드를 모두 비활성화 하십시오.</string>
+    <string name="sysoverlay_button">설정으로 이동합니다.</string>
+    <string name="sysoverlay_button_ok">오버레이 승인 됨.</string>
+    <string name="sysoverlay_content_ok">권한이 승인되었습니다.\n이 창을 닫고 계속 작업을 진행하세요.</string>
+
+    <!-- 메인 화면 - 홈 -->
+    <string name="home_settings_psct_power">스크린 번역기 서비스</string>
+    <string name="home_usage_n_exceed">사용량</string>
+    <string name="home_clear_time">초기화 까지</string>
+    <string name="home_entity_buy_log">구매 이력</string>
+    <string name="home_entity_buy_ticket">할당량 구입</string>
+    <string name="home_entity_set_mode">모드 설정</string>
+    <string name="home_entity_env_settings">환경 설정</string>
+    <string name="home_entity_abount">대하여</string>
+    <string name="home_entity_help">도움말</string>
+
+    <string name="home_power_title">스크린 번역기 서비스</string>
+    <string name="home_power_content">서비스를 켜거나 끕니다.</string>
+    <string name="home_mode_setting_title">번역 모드 설정</string>
+    <string name="home_mode_setting_content">번역기 모드 또는 게이밍 모드를 선택합니다.</string>
+    <string name="home_run_event_setting_title">실행 이벤트 설정</string>
+    <string name="home_run_event_shake_menu">흔들림 감지</string>
+    <string name="home_run_event_overlay_menu">버튼 오버레이</string>
+    <string name="home_mode_default">번역기</string>
+    <string name="home_mode_gaming">게이밍</string>
+
+    <string name="home_list_star_app">스크린 번역기 평가하기</string>
+    <string name="home_list_star_app_content">당신의 가차 없는 평가가 필요합니다.</string>
+    <string name="home_list_help_app">도움말</string>
+    <string name="home_list_help_app_content">무슨 앱인지 전혀 모르겠습니다.</string>
+    <string name="home_list_about">대하여</string>
+    <string name="home_list_about_content">스크린 번역기 개발 정보</string>
+
+    <string name="home_plz_restart_content">설정을 저장했습니다.\n스크린 번역기 서비스를 다시 시작하세요.</string>
+    <string name="home_saveok_content">설정이 적용되었습니다.</string>
+
+
+    <string name="home_select_mode_title">번역 모드 선택</string>
+    <string name="mode_setting_option_default">기본 모드</string>
+    <string name="mode_setting_option_gaming">게이밍 모드</string>
+
+    <string name="home_inode_update_failed">Inode 값을 업데이트 받을 수 없습니다.\n표시되는 값이 정확하지 않을 수 있습니다.</string>
+    <string name="home_setting_reload">권한 처리를 위해 서비스를 다시 활성화하세요.</string>
+
+    <string name="home_card_remain_count">남은 횟수</string>
+    <string name="home_card_remain_reset_time">%1$s시간 %2$s분 남음</string>
+    <string name="home_card_remain_count_namum">남음</string>
+
+    <!-- Bill Acitivty -->
+    <string name="bill_title">사용량 더 늘리기</string>
+    <string name="product_item_title">상품 선택</string>
+    <string name="product_item_content">%1$s 회 스크린 번역기를 더 사용 할 수 있습니다.</string>
+    <string name="product_period_title">기간 선택</string>
+    <string name="product_period_content">선택하신 상품을 %1$s일간 이용 할 수 있습니다.</string>
+    <string name="bill_total_price_title">총 결제 금액</string>
+    <string name="bill_refund_no">결제 이후에 환불 할 수 없으므로 신중히 선택 해 주세요.</string>
+    <string name="product_pay">결제 진행</string>
+    <string name="product_pay_running">결제 진행중!</string>
+    <string name="product_processing">스크린 번역기 서버에서 상품을 개시하고 있습니다...</string>
+    <string name="product_notice_failed">상품을 개시 할 수 없습니다.\n이 창을 닫고, 다시 구매버튼을 눌러 개시를 다시 시도하세요.</string>
+
+    <string name="product_notice_failed_1">결제 ID 를 검증 할 수 없습니다.\n문의를 남겨주세요.</string>
+    <string name="product_notice_failed_2">내부 서버 오류가 발생헀습니다.\n문의를 남겨주세요.</string>
+    <string name="product_notice_failed_3">검증 서버가 응답이 없습니다.\n이 창을 닫고, 다시 구매버튼을 눌러 개시를 다시 시도하세요.</string>
+    <string name="product_notice_failed_4">이미 결제정보가 사용되었습니다.</string>
+    <string name="product_notice_other">서버에서 알 수 없는 응답이 발생했습니다.</string>
+
+    <string name="product_not_found">존재하지 않는 아이템 입니다.\n다른 아이템을 선택 해 주세요.</string>
+    <string name="product_buy_failed">결제 처리에 오류가 발생하였습니다.\n이미 지불되었다면 문의 게시판에 글을 남겨주세요.</string>
+    <string name="product_buy_success">구매 해 주셔서 감사합니다.\n곧 상품이 적용됩니다.</string>
+
+    <!-- Billing log activity -->
+    <string name="billing_log_title">구매 이력</string>
+    <string name="billing_log_empty">아직 아무것도 구매하지 않았습니다.</string>
+
+
+    <!-- 메인 화면 - 설정 -->
+    <string name="env_settings_gaming_enable">게이밍 모드를 활성화 합니다.</string>
+
+    <!-- Abount - 대하여 -->
+    <string name="about_comment_title">문의/건의</string>
+    <string name="about_comment_content">어디 마음에 안드시나요?..</string>
+    <string name="about_notice_title">공지 사항</string>
+    <string name="about_notice_content">앗.. 지금 무슨 일이 일어났나요?</string>
+    <string name="abont_engine_name">엔진 ID</string>
+    <string name="about_version_info">버전 정보</string>
+    <string name="about_dev_info">개발 정보</string>
+    <string name="abount_dev_copyright">&#169; 2015&#8211;2018 Saint software All rights reserved.</string>
+
+    <!-- 설정 프래그먼트 -->
+    <string name="settings_runtime_title">실행 옵션</string>
+    <string name="settings_runtime_event">실행 이벤트</string>
+
+    <string name="settings_runtime_shake_sens">흔들림 감지 감도</string>
+    <string name="settings_runtime_shake_defvaule">2</string>
+    <string name="settings_runtime_vib">진동 사용</string>
+    <string name="settings_storage_title">저장소 관리</string>
+    <string name="settings_storage_cacheauto">캐시를 자동으로 삭제</string>
+    <string name="settings_storage_clear">캐시 비우기</string>
+    <string name="settings_version_title">버전</string>
+    <string name="settings_dev_title">개발</string>
+    <string name="settings_dev_copyright_title">저작권</string>
+
+    <!-- Auth login -->
+    <string name="login_title">또 만났습니다!</string>
+    <string name="login_subtitle">스크린 번역기를 사용하려면 로그인 하세요.</string>
+
+    <!-- Notification -->
+    <string name="notifi_prepared_start_title">스크린 번역기가 준비되었습니다.</string>
+    <string name="notifi_prepared_start_content">시작하려면 아래 버튼을 누르세요.</string>
+    <string name="notifi_prepared_start_button">시작</string>
+    <string name="notifi_running_title">스크린 번역기가 실행 중 입니다.</string>
+    <string name="notifi_running_content">멈추려면 아래 버튼을 누르세요.</string>
+    <string name="notifi_running_button">중지</string>
+
+    <!-- Entitiy -->
+    <string name="entity_progress_ocr">이미지를 분석하고 있습니다.</string>
+    <string name="entity_progress_translate">텍스트를 번역하고 있습니다.</string>
+    <string name="entity_none">None</string>
+    <string name="entity_project_name">Project, Screen translate.</string>
+    <string name="entity_language_select">언어 선택</string>
+    <string name="entity_dashboard">대시 보드</string>
+    <string name="entity_env_settings">환경 설정</string>
+    <string name="entity_check_update">업데이트 확인</string>
+    <string name="entity_exp">레벨 및 경험치</string>
+    <string name="entity_dotdotdot">...</string>
+    <string name="entity_permission_deny">권한이 거부되었습니다.</string>
+    <string name="entity_goto_settings">환경 설정으로 이동.</string>
+    <string name="entity_permission_allowed">승인 되었습니다.</string>
+
+    <string name="entity_current_exp">경험치</string>
+    <string name="entity_current_level">레벨</string>
+    <string name="entity_charge">경험치 충전소</string>
+
+    <string name="entitiy_infinity">∞</string>
+
+    <string name="entity_overlay_permission_deny">오버레이 권한이 없습니다!</string>
+
+    <string name="key_appall_sdk">b59b080ae11d3637dfe7ef8b4650ba49ea2bce95</string>
+
+    <string name="menu_title_payment">구매 및 결제</string>
+    <string name="menu_item_new_pay">새로운 결제</string>
+    <string name="menu_item_pay_log">구매 기록</string>
+    <string name="menu_title_charge">무료 충전소</string>
+    <string name="menu_item_charge_1">충전소 1</string>
+    <string name="menu_item_charge_2">충전소 2</string>
+    <string name="menu_item_charge_log">무료 충전 기록</string>
+    <string name="menu_title_settings">설정</string>
+    <string name="menu_item_settings">환경 설정</string>
+
+    <string name="vf_main_remain_title">남은 실행 가능 횟수</string>
+    <string name="vf_main_unit">회</string>
+
+
+    <!-- OCR and Translate API v2 Support Languages -->
+    <string-array name="supported_languages_v2_codes">
+        <item>unk</item>
+        <item>ko</item> <!-- 한국어 -->
+        <item>en</item> <!-- 영어 -->
+        <item>ja</item> <!-- 일본어 -->
+        <item>zh-Hans</item>    <!-- 중국어 (간체) -->
+        <item>zh-Hant</item>    <!-- 중국어 (번체) -->
+        <item>fr</item> <!-- 프랑스어 -->
+        <item>da</item> <!-- 덴마크어 -->
+        <item>nl</item> <!-- 네덜란드어 -->
+        <item>de</item> <!-- 독일어 -->
+        <item>it</item> <!-- 이탈리아어 -->
+        <item>ru</item> <!-- 러시아어 -->
+        <item>ar</item> <!-- 아랍어 -->
+        <item>ro</item> <!-- 로마어 -->
+    </string-array>
+
+    <string-array name="supported_languages_v2_names">
+        <item>언어 감지</item> <!-- 자동 -->
+        <item>한국어</item> <!-- 한국어 -->
+        <item>영어</item> <!-- 영어 -->
+        <item>일본어</item> <!-- 일본어 -->
+        <item>중국어 (간체)</item>    <!-- 중국어 (간체) -->
+        <item>중국어 (번체)</item>    <!-- 중국어 (번체) -->
+        <item>프랑스어</item> <!-- 프랑스어 -->
+        <item>덴마크어</item> <!-- 덴마크어 -->
+        <item>네덜란드어</item> <!-- 네덜란드어 -->
+        <item>독일어</item> <!-- 독일어 -->
+        <item>이탈리아어</item> <!-- 이탈리아어 -->
+        <item>러시아어</item> <!-- 러시아어 -->
+        <item>아랍어</item> <!-- 아랍어 -->
+        <item>로마어</item> <!-- 로마어 -->
+    </string-array>
+
+    <string-array name="shake_sensitivity_view">
+        <item>매우 낮음</item>
+        <item>낮음</item>
+        <item>보통</item>
+        <item>높음</item>
+        <item>매우 높음</item>
+    </string-array>
+
+    <string-array name="shake_sensitivity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- 기본 색상에 대한 값 이름 -->
+    <string-array name="common_color_names">
+        <item>WHITE</item>
+        <item>RED</item>
+        <item>ORANGE</item>
+        <item>DARK ORANGE</item>
+        <item>YELLOW</item>
+        <item>DARK YELLOW</item>
+        <item>GREEN</item>
+        <item>DARK GREEN</item>
+        <item>BLUE</item>
+        <item>DARK BLUE</item>
+        <item>PURPLE</item>
+        <item>DARK PURPLE</item>
+        <item>BLACK</item>
+    </string-array>
+
+    <!-- 기본 색상에 대한 값 -->
+    <string-array name="common_color_codes">
+        <item>#ecf0f1</item>
+        <item>#c0392b</item>
+        <item>#e67e22</item>
+        <item>#d35400</item>
+        <item>#f1c40f</item>
+        <item>#f39c12</item>
+        <item>#2ecc71</item>
+        <item>#16a085</item>
+        <item>#3498db</item>
+        <item>#2980b9</item>
+        <item>#9b59b6</item>
+        <item>#8e44ad</item>
+        <item>#1f2b38</item>
+    </string-array>
+
+    <!-- Product items -->
+    <string-array name="products_item_name">
+        <item>120회 추가 증량</item>
+        <item>247회 추가 증량</item>
+        <item>378회 추가 증량</item>
+        <item>518회 추가 증량</item>
+    </string-array>
+
+    <string-array name="products_item_id">
+        <item>remain_increase_120</item>
+        <item>remain_increase_240</item>
+        <item>remain_increase_378</item>
+        <item>remain_increase_518</item>
+    </string-array>
+
+    <string-array name="runevent_view">
+        <item>흔들림 감지 모드</item>
+        <item>오버레이 버튼 모드</item>
+    </string-array>
+    <string-array name="runevent_code">
+        <item>device_shake</item>
+        <item>device_button_overlay</item>
+    </string-array>
+
+    <string-array name="common_size_names">
+        <item>매우 작게</item>
+        <item>작게</item>
+        <item>보통</item>
+        <item>크게</item>
+        <item>매우 크게</item>
+    </string-array>
+    <string-array name="common_size_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="license_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1o656yj046nVR4VouzHwAGyapG+HYR4rYJUkCGqIxgNxMT8UP1VjdcnSjucs1Eq/bFLaqPWzk0SO0K+CfQhslDqzQOYePnbtC50x37QPYOaYru6tXUId/8y7Zaf4RiAm38tdAZ07GSGqJ9CTMJWyUrbKWCoSxwr5PArvlL2kBL3H3vrhTU9aHO3xKygjhWJKhS7CMzEirnMvGPEe6rkjNGtl0ITMioqWlYgWbracIuUIGArFCscf0I/3Pr5ByNePnpmvQnU4xwWKdiIsOBWNou+ciOGT/Zq9oO7+W92QAB+T4rG+kPFfo5/O3XE9vfl3EU9/E18KR+YItJpgd8y6WwIDAQAB</string>
+    <string name="cauly_key">CAULY</string>
+</resources>

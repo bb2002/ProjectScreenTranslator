@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application default colors -->
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#7B1FA2</color>
+    <color name="colorAccent">#7C4DFF</color>
+    <color name="primaryLight">#E1BEE7</color>
+    <color name="primaryText">#212121</color>
+    <color name="primarySecondText">#757575</color>
+
+    <color name="colorTextDefault">#212121</color>
+    <color name="colorTextSecond">#757575</color>
+    <color name="colorPrimaryLight">#C5CAE9</color>
+    <color name="colorBackgroundPrimary">#F0F0F0</color>
+
+
+    <!-- Secondary color -->
+    <color name="colorRed">#CC3B2F</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="waterBlueWhite">#FFF9FF</color>
+    <color name="colorGray">#687178</color>
+    <color name="colorBlue">#0078D7</color>
+    <color name="colorGreenWhite">#2ecc71</color>
+    <color name="colorGreen">#27ae60</color>
+
+    <color name="cardviewColor1">#2c3e50</color>
+
+    <!-- Character trend color -->
+    <color name="ll_aqours_chika_hard">#FF7E01</color>
+    <color name="ll_aqours_you_original">#4DB6F9</color>
+</resources>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="kr.saintdev.pst.vnc.activity.view.MainActivity">
+    <!-- 광고 출력 -->
+    <include
+        layout="@layout/layout_ads_banner"
+        android:id="@+id/main_ads_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@id/main_ads_view">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:id="@+id/main_card_1"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="@color/colorBlue"
+                android:layout_margin="16dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="18dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/main_header_remain_count"
+                        android:text="@string/home_card_remain_count"
+                        android:fontFamily="@font/nanum_barun_gothic_regular"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/main_header_clear_remain"
+                        android:layout_below="@id/main_header_remain_count"
+                        android:text="@string/home_card_remain_reset_time"
+                        android:fontFamily="@font/nanum_barun_gothic_regular"
+                        android:textSize="12sp"
+                        android:textColor="#B4BBF0"
+                        android:layout_alignStart="@id/main_header_remain_count"
+                        android:layout_marginTop="4dp"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_stopwatch_white"
+                        android:layout_alignParentBottom="true" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_alignParentEnd="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/main_remain_count"
+                            android:text="@string/entity_none"
+                            android:fontFamily="@font/nanum_barun_gothic_regular"
+                            android:textColor="#ffffff"
+                            android:textSize="32sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_card_remain_count_namum"
+                            android:fontFamily="@font/nanum_barun_gothic_regular"
+                            android:textSize="12sp"
+                            android:textColor="#B4BBF0"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/main_service_power"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/colorGray"
+                android:layout_below="@id/main_card_1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/v5_home_service_power_container">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/home_settings_psct_power"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginStart="18dp"
+                        android:textSize="13sp" />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_power_white"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="18dp"
+                        android:padding="4dp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_tiles"
+                android:layout_margin="16dp"
+                android:columnCount="2"
+                android:rowCount="3"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

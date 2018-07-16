@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!-- 구매 및 결제 메뉴 -->
+        <item
+            android:id="@+id/navigation_menu_payment"
+            android:text="@string/menu_title_payment"
+            android:title="@string/menu_title_payment">
+            <menu>
+                <item
+                    android:id="@+id/navigation_item_new_pay"
+                    android:icon="@drawable/vf_icon_card_black"
+                    android:title="@string/menu_item_new_pay"/>
+                <item
+                    android:id="@+id/navigation_item_pay_log"
+                    android:icon="@drawable/vf_icon_note_black"
+                    android:title="@string/menu_item_pay_log"/>
+            </menu>
+        </item>
+
+        <!-- 무료 충전소 -->
+        <item
+            android:id="@+id/navigation_menu_charge"
+            android:text="@string/menu_title_charge"
+            android:title="@string/menu_title_charge">
+            <menu>
+                <item
+                    android:id="@+id/navigation_item_charge_1"
+                    android:title="@string/menu_item_charge_1"
+                    android:icon="@drawable/vf_ic_roman_1"/>
+                <item
+                    android:id="@+id/navigation_item_charge_2"
+                    android:title="@string/menu_item_charge_2"
+                    android:icon="@drawable/vf_ic_roman_2"/>
+                <item
+                    android:id="@+id/navigation_item_charge_log"
+                    android:icon="@drawable/vf_icon_note_black"
+                    android:title="@string/menu_item_charge_log" />
+            </menu>
+        </item>
+
+        <!-- 설정 -->
+        <item
+            android:id="@+id/navigation_menu_settings"
+            android:text="@string/menu_title_settings"
+            android:title="@string/menu_title_settings">
+            <menu>
+                <item
+                    android:id="@+id/navigation_item_settings"
+                    android:title="@string/menu_item_settings"
+                    android:icon="@drawable/vf_icon_settings_black" />
+            </menu>
+        </item>
+
+    </group>
+</menu>

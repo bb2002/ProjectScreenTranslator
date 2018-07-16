@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="kr.saintdev.pst">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        tools:replace="android:icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Saint.PSCT.Common.Theme">
+        <activity android:name=".vnc.activity.view.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Sub activities -->
+        <activity android:name=".vnc.activity.view.SignInActivity"
+            android:enabled="true"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".vnc.activity.view.MediaProjectionAcitivty"
+            android:enabled="true"
+            android:screenOrientation="portrait" />
+        <activity android:name=".vnc.activity.view.TranslateActivity"
+            android:enabled="true"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".vnc.activity.view.ImageCropActivity"
+            android:enabled="true"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".vnc.activity.view.SettingActivity"
+            android:enabled="true"
+            android:label="@string/title_settings_activity"
+            android:theme="@style/SettingsTheme"/>
+        <activity android:name=".vnc.activity.view.SystemOverlayActivity"
+            android:enabled="true" />
+        <activity android:name=".vnc.activity.view.BillActivity"
+            android:enabled="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.fsn.cauly.blackdragoncore.LandingActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
+        <activity android:name=".vnc.activity.view.BillingLogActivity"
+            android:enabled="true" />
+        <activity android:name=".vnc.activity.view.AboutActivity"
+            android:enabled="true" />
+        <activity android:name=".vnc.activity.view.WebBrowserActivity"
+            android:enabled="true" />
+
+        <!-- Services -->
+        <service android:name=".models.components.services.DisplayCaptureService"
+            android:enabled="true"/>
+        <service android:name=".models.components.services.AlwaysOnService"
+            android:enabled="true"/>
+        <service android:name=".models.components.services.ShakeDetectService"
+            android:enabled="true" />
+        <service android:name=".models.components.services.GamingModeService"
+            android:enabled="true" />
+        <service android:name=".models.components.services.StartButtonOverlayService"
+            android:enabled="true" />
+
+        <!-- Broadcast receiver -->
+        <receiver android:name=".models.components.broadcast.ProcedureBroadcastRecv"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="kr.saintdev.psct.aos.settings" />
+                <action android:name="kr.saintdev.psct.aos.switch" />
+                <action android:name="kr.saintdev.psct.aos.force_on" />
+                <action android:name="kr.saintdev.psct.aos.force_off" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "712514555951",
+    "firebase_url": "https://projectscreentrans.firebaseio.com",
+    "project_id": "projectscreentrans",
+    "storage_bucket": "projectscreentrans.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712514555951:android:8bbc867dcb2393e1",
+        "android_client_info": {
+          "package_name": "kr.saintdev.pst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712514555951-gu7hlbvq13n5h27j9kg63ap48fs7ll67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.saintdev.pst",
+            "certificate_hash": "a6a4712763678fe65f2ee1065c5d2e48a9d7aabe"
+          }
+        },
+        {
+          "client_id": "712514555951-7munjpm641cr9tk06esamiv560opdhr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJl4ZmNthH32rozJ3oV3lZbEOdvq9pavs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712514555951-7munjpm641cr9tk06esamiv560opdhr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

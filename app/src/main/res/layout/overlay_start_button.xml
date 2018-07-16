@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/overlay_start"
+        android:src="@drawable/app_icon"
+        android:scaleType="centerInside"
+        android:padding="8dp"
+        android:background="@drawable/primary_circle"
+        android:alpha="0.7"/>
+</RelativeLayout>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/vf_main_layout">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorBackgroundPrimary">
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/vf_main_content_toolbar"
+                app:titleTextColor="@color/colorWhite"
+                android:background="@color/colorPrimary"/>
+            <!-- 남은 실행 가능 횟수 정의 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:id="@+id/vf_main_content_container"
+                android:background="@color/colorPrimary">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vf_main_remain_title"
+                    android:text="@string/vf_main_remain_title"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vf_main_remain_container"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/vf_main_remain_title"
+                    android:layout_marginEnd="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vf_main_remain_count"
+                        android:text="0"
+                        android:textSize="40sp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="@color/colorWhite"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vf_main_unit"
+                        android:textColor="@color/colorWhite"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vf_main_remain_timer_container"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/vf_main_remain_container">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="초기화 까지 남은 시간"
+                        android:textColor="@color/colorWhite"/>
+
+                    <TextView
+                        android:id="@+id/vf_main_reset_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="00 시간 00분 남음"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 스크린 번역기 전원 -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:id="@+id/vf_main_power_container"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vf_main_power_title"
+                        android:text="@string/home_power_title"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/colorTextDefault"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/vf_main_power_title"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorTextSecond"
+                        android:text="@string/home_power_content"
+                        android:textSize="12sp"/>
+                    <com.github.angads25.toggle.LabeledSwitch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vf_main_power_switch"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="8dp"
+                        app:textOff="@string/common_do_start"
+                        app:textOn="@string/common_do_stop"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 구분 선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#dadada"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- 모드 세팅 Swipe View -->
+            <com.daimajia.swipe.SwipeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:id="@+id/vf_main_mode_setting"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+                <LinearLayout
+                    android:layout_width="144dp"
+                    android:layout_height="72dp"
+                    android:id="@+id/vf_main_mode_setting_container"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/vf_mode_selector_default"
+                        android:background="@color/colorGreenWhite"
+                        android:padding="8dp"
+                        android:text="@string/home_mode_default"/>
+                    <Button
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/vf_mode_selector_gaming"
+                        android:background="@color/colorWhite"
+                        android:padding="8dp"
+                        android:text="@string/home_mode_gaming"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/vf_main_mode_setting_surface"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/colorWhite">
+
+                    <ImageView
+                        android:id="@+id/vf_main_mode_setting_open"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/vf_icon_left_arrow"/>
+
+                    <TextView
+                        android:id="@+id/vf_main_mode_setting_open_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/home_mode_setting_title"
+                        android:textColor="@color/colorTextDefault" />
+
+                    <TextView
+                        android:id="@+id/vf_main_mode_setting_open_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/vf_main_mode_setting_open_title"
+                        android:layout_below="@id/vf_main_mode_setting_open_title"
+                        android:text="@string/home_mode_setting_content" />
+                </RelativeLayout>
+            </com.daimajia.swipe.SwipeLayout>
+
+            <!-- 실행 이벤트 Swipe View -->
+            <com.daimajia.swipe.SwipeLayout
+                android:id="@+id/vf_main_run_event_setting"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="16dp">
+                <LinearLayout
+                    android:layout_width="144dp"
+                    android:layout_height="72dp"
+                    android:id="@+id/vf_main_mode_run_event_container"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/vf_run_event_selector_shake"
+                        android:background="@color/colorGreenWhite"
+                        android:padding="8dp"
+                        android:text="@string/home_run_event_shake_menu"/>
+                    <Button
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/vf_run_event_selector_overlay"
+                        android:background="@color/colorWhite"
+                        android:padding="8dp"
+                        android:text="@string/home_run_event_overlay_menu"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/vf_main_run_event_setting_surface"
+                    android:background="@color/colorWhite">
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/vf_main_run_event_setting_open"
+                        android:src="@drawable/vf_icon_left_arrow"
+                        android:layout_alignParentEnd="true"/>
+
+                    <TextView
+                        android:id="@+id/vf_main_run_event_setting_open_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="8dp"
+                        android:text="@string/home_run_event_setting_title"
+                        android:textColor="@color/colorTextDefault" />
+                </RelativeLayout>
+            </com.daimajia.swipe.SwipeLayout>
+
+            <!-- 구분 선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#dadada"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- 스크롤 뷰 안에 리스트 뷰 불가, 복붙으로 대체 -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/vf_main_listitem_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item1_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/home_list_star_app"
+                        android:textColor="@color/colorTextDefault"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item1_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/vf_main_listview_item1_title"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/home_list_star_app_content"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_star_black" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:id="@+id/vf_main_listitem_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item2_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/home_list_help_app"
+                        android:textColor="@color/colorTextDefault"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item2_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/vf_main_listview_item2_title"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/home_list_help_app_content"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_help_black" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/vf_main_listitem_3"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_margin="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="4dp"
+                app:cardBackgroundColor="@color/colorWhite">
+
+                <RelativeLayout
+                    android:id="@+id/vf_main_listitem_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item3_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/home_list_about"
+                        android:textColor="@color/colorTextDefault"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/vf_main_listview_item3_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/vf_main_listview_item3_title"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/home_list_about_content"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_about_black" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/vf_nav_container"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/vf_layout_navigation"
+        app:menu="@menu/vf_navigation_menu"/>
+</android.support.v4.widget.DrawerLayout>
