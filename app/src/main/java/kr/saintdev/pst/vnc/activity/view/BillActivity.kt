@@ -20,6 +20,8 @@ import kr.saintdev.pst.models.libs.async.OnBackgroundWorkListener
 import kr.saintdev.pst.models.libs.manager.RepositoryKey
 import kr.saintdev.pst.models.libs.manager.RepositoryManager
 import kr.saintdev.pst.vnc.activity.CommonActivity
+import kr.saintdev.pst.vnc.adapter.BillItemAdapter
+import kr.saintdev.pst.vnc.adapter.ProductItemData
 import kr.saintdev.pst.vnc.dialog.message.DialogManager
 import kr.saintdev.pst.vnc.dialog.message.OnDialogButtonClickListener
 import java.lang.Exception
@@ -30,30 +32,43 @@ import java.lang.Exception
  * @Date 2018-07-09
  */
 class BillActivity : CommonActivity(), BillingProcessor.IBillingHandler {
-    private var billProcess: BillingProcessor? = null
-    private var selectedProductId = "remain_increase_247"         // 기본 값은 247 회 추가 입니다.
+    private lateinit var billProcess: BillingProcessor
     private val REQUEST_BILLING_CODE = 0x0
+    private val billItemAdapter = BillItemAdapter()
+    private val onItemClickListener = AdapterView.OnItemClickListener {
+        adapter, view, postion, id ->
+        val itemIdArray = resources.getStringArray(R.array.vf_products_item_id)
+        buyNewTicket(itemIdArray[postion])
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_billing)
 
+        // Backbutton 을 만듭니다.
+        vf_bill_toolbar.title = R.string.menu_item_new_pay.str()
+        vf_bill_toolbar.setNavigationIcon(R.drawable.ic_back_white)
+        vf_bill_toolbar.setNavigationOnClickListener { finish() }
+
         // bill process
         this.billProcess = BillingProcessor(this, R.string.license_key.str(), this)
-        product_buy.setOnClickListener { buyNewTicket() }
-
-        title = R.string.title_bill_activity.str()
+        vf_bill_content.onItemClickListener = onItemClickListener
 
         openProgressDialog()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if(billProcess != null) billProcess!!.release()
+        billProcess.release()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(!billProcess!!.handleActivityResult(requestCode, resultCode, data)) {
+        if(!billProcess.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -65,10 +80,27 @@ class BillActivity : CommonActivity(), BillingProcessor.IBillingHandler {
     override fun onBillingInitialized() {
         closeProgressDialog()
 
-        product_select_item.adapter =
-                ArrayAdapter.createFromResource(this, R.array.products_item_name, android.R.layout.simple_spinner_dropdown_item)
-        product_select_item.onItemSelectedListener = onProductChangeListener        // Listener 등록
-        selectDefaultItem()
+        val itemNameArray = resources.getStringArray(R.array.vf_products_item_name)
+        val itemContentArray = resources.getStringArray(R.array.vf_products_item_content)
+        val colorArray = resources.getIntArray(R.array.rainbow)
+
+        val productItemID = arrayListOf<String>()
+        productItemID.addAll(resources.getStringArray(R.array.vf_products_item_id))
+        val products = billProcess.getPurchaseListingDetails(productItemID)     // 아이템 목록을 불러온다.
+        products.sortBy { it.priceLong }
+
+        for(i in 0 until products.size) {
+            val product = products[i]
+
+            billItemAdapter.addItem(ProductItemData(
+                    itemNameArray[i],
+                    itemContentArray[i],
+                    colorArray[i],
+                    product.priceText
+            ))
+        }
+
+        vf_bill_content.adapter = billItemAdapter
     }
 
     /**
@@ -98,9 +130,6 @@ class BillActivity : CommonActivity(), BillingProcessor.IBillingHandler {
         if(errorCode != Constants.BILLING_RESPONSE_RESULT_USER_CANCELED) {
             openMessageDialog(R.string.error_msg_title_fatal.str(), R.string.product_buy_failed.str())
         }
-
-        product_buy.isEnabled = true      // 버튼을 비활성화 하고
-        product_buy.text = R.string.product_pay.str()       // 결제 진행중 표시
     }
 
     override fun onPurchaseHistoryRestored() {
@@ -112,17 +141,7 @@ class BillActivity : CommonActivity(), BillingProcessor.IBillingHandler {
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             // 선택된 값을 가져온다.
-            val itemId = R.array.products_item_id.array()[product_select_item.selectedItemPosition]
-            val product = billProcess?.getPurchaseListingDetails(itemId)
 
-            if(product == null) {
-                openMessageDialog(R.string.error_msg_title_warning.str(), R.string.product_not_found.str())
-                selectDefaultItem()
-            } else {
-                // 제품을 표시한다.
-                product_total_price.text = product.priceText
-                selectedProductId = itemId
-            }
         }
     }
 
@@ -176,24 +195,12 @@ class BillActivity : CommonActivity(), BillingProcessor.IBillingHandler {
         }
     }
 
-    /**
-     * Functions
-     */
-    fun selectDefaultItem() {
-        product_select_item.setSelection(1)         // 기본 아이템 선택
-    }
-
-    fun buyNewTicket() {
-        if(billProcess != null) {
-            if (billProcess!!.isPurchased(selectedProductId)) {
-                billProcess!!.consumePurchase(selectedProductId)
-            }
-
-            billProcess!!.purchase(this, selectedProductId)
-            product_buy.isEnabled = false       // 버튼을 비활성화 하고
-            product_buy.text = R.string.product_pay_running.str()       // 결제 진행중 표시
-        } else {
-            openMessageDialog(R.string.error_msg_title_fatal.str(), "Bill process is null")
+    fun buyNewTicket(productId: String) {
+        // 구매된 아이템은 소멸 처리 한다.
+        if (billProcess.isPurchased(productId)) {
+            billProcess.consumePurchase(productId)
         }
+
+        billProcess.purchase(this, productId)
     }
 }

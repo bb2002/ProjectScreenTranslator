@@ -24,7 +24,6 @@ import kr.saintdev.pst.models.libs.async.BackgroundWork
 import kr.saintdev.pst.models.libs.async.OnBackgroundWorkListener
 import kr.saintdev.pst.models.libs.checkAPILevel
 import kr.saintdev.pst.models.libs.checkSystemOverlayPermisson
-import kr.saintdev.pst.models.libs.doOpenAdsActivity
 import kr.saintdev.pst.models.libs.manager.EnvSettingKeys
 import kr.saintdev.pst.models.libs.manager.EnvSettingManager
 import kr.saintdev.pst.models.libs.manager.RepositoryKey

@@ -16,7 +16,6 @@
         android:layout_toEndOf="@id/layout_about_icon"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/nanum_barun_gothic"
         android:layout_marginStart="16dp"/>
 
     <TextView
@@ -26,7 +25,6 @@
         android:layout_toEndOf="@id/layout_about_icon"
         android:textSize="12sp"
         android:textColor="@color/colorGray"
-        android:fontFamily="@font/nanum_barun_gothic"
         android:layout_marginStart="16dp"
         android:layout_below="@id/layout_about_title"/>
 </RelativeLayout>

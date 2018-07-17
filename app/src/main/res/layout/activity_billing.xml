@@ -1,95 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/product_select_container"
-        android:orientation="vertical"
-        android:layout_margin="24dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bill_title"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDark"/>
-        <include
-            layout="@layout/layout_hr_compat"
+        android:id="@+id/vf_bill_toolbar"
+        app:titleTextColor="@color/colorWhite"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/vf_bill_warning_container"
+        android:layout_alignParentBottom="true">
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1.5dp"
+            android:layout_height="0.5dp"
+            android:background="#dadada"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
-
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_warning"
+            android:id="@+id/vf_bill_warning_icon"
+            android:layout_margin="16dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/product_item_title"
-            android:textSize="16sp"
+            android:id="@+id/vf_bill_warning_title"
+            android:text="@string/bill_refund_title"
+            android:layout_toEndOf="@id/vf_bill_warning_icon"
             android:layout_marginTop="16dp"
-            android:textColor="#333333"/>
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/product_select_item"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_bill_container"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="24dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/bill_total_price_title"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_weight="1"
-                android:gravity="center_vertical"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/product_total_price"
-                android:text="@string/entity_none"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:textSize="24sp"
-                android:textColor="@color/colorBlue"/>
-        </LinearLayout>
-
+            android:textColor="@color/colorTextDefault"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/bill_refund_no"
+            android:id="@+id/vf_bill_warning_content"
+            android:layout_below="@id/vf_bill_warning_title"
+            android:layout_toEndOf="@id/vf_bill_warning_icon"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
             android:textSize="12sp"
             android:textColor="@color/colorRed"
-            android:layout_marginTop="4dp"/>
+            android:text="@string/bill_refund_no"
+            />
+    </RelativeLayout>
 
-        <include
-            layout="@layout/layout_hr_compat"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:id="@+id/product_buy"
-                android:text="@string/product_pay"
-                android:background="@color/colorGreen"
-                android:textColor="@color/colorWhite"
-                android:paddingLeft="48dp"
-                android:paddingRight="48dp"/>
-        </RelativeLayout>
-    </LinearLayout>
+    <co.ceryle.fitgridview.FitGridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vf_bill_content"
+        android:layout_above="@id/vf_bill_warning_container"
+        android:layout_below="@id/vf_bill_toolbar"
+        android:listSelector="@android:color/transparent"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp"
+        app:column="2"
+        app:row="4"
+        android:layout_margin="8dp"/>
 </RelativeLayout>

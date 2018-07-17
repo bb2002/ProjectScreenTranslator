@@ -11,6 +11,7 @@ const val HTTP_INODE_UPDATER = HTTP_BASE_URL + "inode/inode-status.php"
 const val HTTP_INODE_BILLING = HTTP_BASE_URL + "inode/inode-billing.php"
 const val HTTP_UPDATE_CHECK = HTTP_BASE_URL + "data/last-version.php"
 const val HTTP_BILLING_LOG = HTTP_BASE_URL + "data/billing-log.php"
+const val HTTP_FREE_CHARGE_LOG = HTTP_BASE_URL + "data/freecharge-log.php"
 
 /**
  * Web site

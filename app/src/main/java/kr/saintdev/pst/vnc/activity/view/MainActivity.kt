@@ -1,5 +1,6 @@
 package kr.saintdev.pst.vnc.activity.view
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -7,16 +8,22 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.daimajia.swipe.SwipeLayout
 import com.github.angads25.toggle.LabeledSwitch
 import com.github.angads25.toggle.interfaces.OnToggledListener
+import com.kyad.adlibrary.AppAllOfferwallSDK
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.vf_activity_main.*
+import kotlinx.android.synthetic.main.vf_layout_navigation.*
+import kotlinx.android.synthetic.main.vf_layout_navigation.view.*
 import kr.saintdev.pst.R
 import kr.saintdev.pst.R.id.*
 import kr.saintdev.pst.models.components.broadcast.ProcedureEngine
 import kr.saintdev.pst.models.http.HttpResponseObject
 import kr.saintdev.pst.models.http.PREPARED_REQUEST_DEFINE_INODE_UPDATER
+import kr.saintdev.pst.models.http.modules.downloader.ImageDownloader
 import kr.saintdev.pst.models.http.modules.updater.Updater
 import kr.saintdev.pst.models.http.requestInodeUpdate
 import kr.saintdev.pst.models.http.saveInodeUpdate
@@ -28,8 +35,12 @@ import kr.saintdev.pst.models.libs.startAlwaysOnNotificationService
 import kr.saintdev.pst.vnc.activity.CommonActivity
 import kr.saintdev.pst.vnc.activity.DialogType
 import kr.saintdev.pst.vnc.activity.control.MainActivityControl
+import org.jetbrains.anko.imageBitmap
+import android.widget.Toast
 
-class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedListener, AppAllOfferwallSDK.AppAllOfferwallSDKListener {
 
     /**
      * Listener
@@ -60,7 +71,7 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
             else -> null
         }
 
-        openSweetDialog(R.string.info_msg_title, R.string.home_saveok_content, DialogType.SUCCESS)
+        openPrettyDialog(R.string.info_msg_title, R.string.home_saveok_content, DialogType.SUCCESS)
 
         if(data != null) {
             repositoryManager.createHashValue(data[0] as RepositoryKey, data[1] as String)
@@ -81,7 +92,7 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
             else -> null
         }
 
-        openSweetDialog(R.string.info_msg_title, R.string.home_plz_restart_content, DialogType.WARNING)
+        openPrettyDialog(R.string.info_msg_title, R.string.home_plz_restart_content, DialogType.WARNING)
 
         if(data != null) {
             envManager.forceWrite(data[0], data[1])
@@ -97,9 +108,9 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
         }
     }
 
-    lateinit var control: MainActivityControl
-    lateinit var repositoryManager: RepositoryManager
-    lateinit var envManager: EnvSettingManager
+    private lateinit var control: MainActivityControl
+    private lateinit var repositoryManager: RepositoryManager
+    private lateinit var envManager: EnvSettingManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +152,9 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
             if (updater != null)
                 if (updater.isNeedUpdate) Updater.openUpdateDialog(this@MainActivity, updater.versionCode)
         }, this)
+
+        val psctToken = repositoryManager.getHashValue(RepositoryKey.PSCT_AUTH_ACCOUNT_TOKEN)
+        AppAllOfferwallSDK.getInstance().initOfferWall(this, R.string.appall_key.str(), psctToken)
     }
 
     override fun onResume() {
@@ -165,7 +179,8 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
 
             // 스크린 번역기 상태를 버튼으로 표시한다.
             control.updateServicePowerView(isProcedureServiceWorking(this))
-            displayNowSettings()
+            displayNowSettings()        // 현재 상태값 업데이트
+            displayProfileData()        // 프로필 업데이트
         }
     }
 
@@ -173,9 +188,15 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
         val clazz = when(item.itemId) {
             R.id.navigation_item_new_pay -> BillActivity::class.java
             R.id.navigation_item_pay_log -> BillingLogActivity::class.java
-            R.id.navigation_item_charge_1 -> null
-            R.id.navigation_item_charge_2 -> null
-            R.id.navigation_item_charge_log -> null
+            R.id.navigation_item_charge_1 -> {
+                control.openFreeCharge1()
+                null
+            }
+            R.id.navigation_item_charge_2 -> {
+                control.openFreeCharge2()
+                null
+            }
+            R.id.navigation_item_charge_log -> FreeChargeLogActivity::class.java
             R.id.navigation_item_settings -> SettingActivity::class.java
             else -> null
         }
@@ -187,6 +208,14 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
         } else {
             control.openActivity(clazz)
             true
+        }
+    }
+
+    override fun AppAllOfferwallSDKCallback(response: Int) {
+        when (response) {
+            AppAllOfferwallSDK.AppAllOfferwallSDK_INVALID_USER_ID -> openPrettyDialog(R.string.home_appall_error, R.string.home_appall_error_1_content, DialogType.ERROR)
+            AppAllOfferwallSDK.AppAllOfferwallSDK_INVALID_KEY -> openPrettyDialog(R.string.home_appall_error, R.string.home_appall_error_2_content, DialogType.ERROR)
+            AppAllOfferwallSDK.AppAllOfferwallSDK_NOT_GET_ADID -> openPrettyDialog(R.string.home_appall_error, R.string.home_appall_error_3_content, DialogType.WARNING)
         }
     }
 
@@ -225,7 +254,10 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
     /**
      * Functions
      */
-    fun displayNowSettings() {
+    /**
+     * 초기 값을 표시한다.
+     */
+    private fun displayNowSettings() {
         val modeSetting = repositoryManager.getHashValue(RepositoryKey.MODE_SETTING)
 
         val button = when(modeSetting) {
@@ -247,5 +279,36 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
         }
 
         if(runEventButton != null) control.settingCheckedChange(runEventButton[0], runEventButton[1])
+    }
+
+    /**
+     * 프로필 사진과 이메일을 표시한다.
+     */
+    private fun displayProfileData() {
+        val user = AuthManager.Account.firebaseAuth.currentUser
+
+        if(user != null) {
+            val headerView = vf_nav_container.getHeaderView(0)
+
+            val profileView = headerView.findViewById<CircleImageView>(R.id.vf_navigation_profile_icon)
+            val emailView = headerView.findViewById<TextView>(R.id.vf_navigation_email)
+
+            emailView.text = user.email
+            ImageDownloader(user.photoUrl.toString(), 0x0, object : OnBackgroundWorkListener {
+                override fun onSuccess(requestCode: Int, worker: BackgroundWork<*>?) {
+                    val image = worker?.result as? Bitmap
+
+                    if(image != null) {
+                        profileView.imageBitmap = image
+                    } else {
+                        onFailed(0x0, null)
+                    }
+                }
+
+                override fun onFailed(requestCode: Int, ex: java.lang.Exception?) {
+                    openPrettyDialog(R.string.error_msg_title_warning, R.string.home_profile_download_failed, DialogType.ERROR)
+                }
+            }).execute()
+        }
     }
 }

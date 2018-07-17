@@ -2,7 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vf_translate_toolbar"
+        app:titleTextColor="@color/colorWhite"
+        android:background="@color/colorPrimary" />
+
     <!-- 광고 뷰 -->
     <include
         layout="@layout/layout_ads_banner"
@@ -16,13 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_above="@id/tran_ads_view">
+        android:layout_above="@id/tran_ads_view"
+        android:layout_below="@id/vf_translate_toolbar">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/translate_original_container"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorTextDefault">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,7 +108,7 @@
                     android:id="@+id/tran_converted_view"
                     android:gravity="center_vertical"
                     android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorTextDefault"/>
             </ScrollView>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -116,7 +125,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorTextDefault"
                     android:background="@null"
                     android:padding="8dp"
                     android:text="@string/entity_none"

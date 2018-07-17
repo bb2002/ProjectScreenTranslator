@@ -6,22 +6,22 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/vf_billlog_toolbar"
+        android:id="@+id/vf_free_charge_toolbar"
         app:titleTextColor="@color/colorWhite"
         android:background="@color/colorPrimary" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/billing_list"
-        android:layout_below="@id/vf_billlog_toolbar"
+        android:id="@+id/free_charge_list"
+        android:layout_below="@id/vf_free_charge_toolbar"
         android:layout_margin="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/billing_empty"
-        android:text="@string/billing_log_empty"
+        android:id="@+id/free_charge_empty"
+        android:text="@string/free_charge_log_empty"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/nanum_gothic"

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_billing_log.*
 import kr.saintdev.pst.R
 import kr.saintdev.pst.models.consts.COMMENT_PAGE
 import kr.saintdev.pst.models.consts.WORDPRESS_NOTIFY
@@ -27,7 +28,9 @@ class AboutActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        title = R.string.title_about_activity.str()
+        vf_about_toolbar.title = R.string.home_list_about.str()
+        vf_about_toolbar.setNavigationIcon(R.drawable.ic_back_white)
+        vf_about_toolbar.setNavigationOnClickListener { finish() }
 
         about_content.adapter = adapter
         about_content.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->

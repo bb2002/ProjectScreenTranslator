@@ -37,14 +37,12 @@ class BillLogAdapter : BaseAdapter() {
 
         // 객체 찾기
         val titleView = view.findViewById<TextView>(R.id.billlog_title)
-        val iconView = view.findViewById<ImageView>(R.id.billlog_icon)
         val contentView = view.findViewById<TextView>(R.id.billlog_content)
 
         val item = this.items[position]
 
         titleView.text = item.title
         contentView.text = item.content
-        iconView.setImageResource(item.icon)
 
         return view
     }
@@ -56,4 +54,4 @@ class BillLogAdapter : BaseAdapter() {
     override fun getCount() = items.size
 }
 
-data class BillLogItem(val title: String, val content: String, val icon: Int)
+data class BillLogItem(val title: String, val content: String)

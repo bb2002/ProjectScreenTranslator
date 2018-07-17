@@ -6,14 +6,20 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.widget.Toast
+import kr.saintdev.pst.Manifest
 import kr.saintdev.pst.R
 import kr.saintdev.pst.models.components.broadcast.ProcedureBroadcastRecv
 import kr.saintdev.pst.models.components.services.AlwaysOnService
+import kr.saintdev.pst.models.components.services.GamingModeService
 import kr.saintdev.pst.models.components.services.ShakeDetectService
 import kr.saintdev.pst.models.components.services.StartButtonOverlayService
 import kr.saintdev.pst.models.libs.manager.RepositoryKey
@@ -65,8 +71,8 @@ fun isScreenTranslaterRunningValue(context: Context): Boolean {
         }
     }
 
-    // 화면에 오버레이가 있다면 중지합니다.
-    return /*!isServiceRunningCheck(context, GamingModeOverlayService::class.java) &&*/ pm.isInteractive
+    // 화면에 오버레이가 있다면 실행하지 않습니다.
+    return !isServiceRunningCheck(context, GamingModeService::class.java) && pm.isInteractive
 }
 
 
@@ -129,25 +135,48 @@ fun requestSystemOverlayPermission(context: Context) =
 fun checkSystemOverlayPermisson(context: Context) =
         !(checkAPILevel(Build.VERSION_CODES.M) && !Settings.canDrawOverlays(context))
 
-/**
- * 광고 액티비티를 열지 결정한다.
- */
-var sessionOfAdsOpen = 0
-fun doOpenAdsActivity(context: Context) = true
-//        if(!RepositoryManager.quicklyGet(RepositoryKey.TICKET_USING, context)!!.toBoolean()
-//            && sessionOfAdsOpen < 5 && true) {
-//            // 정액권이 없고, 현 세션에서 5회 미만 광고가 표시됬다면
-//            val rd = Random()
-//            sessionOfAdsOpen ++
-//            rd.nextInt(5) == 0       // 20% 확률로 광고를 발생 시킨다.
-//        } else {
-//            false
-//        }
-
 fun productItemIdToItemName(itemId: String, context: Context) : String {
-    val itemIdArray = context.resources.getStringArray(R.array.products_item_id)
-    val itemNameArray = context.resources.getStringArray(R.array.products_item_name)
+    val itemIdArray = context.resources.getStringArray(R.array.vf_products_item_id)
+    val itemNameArray = context.resources.getStringArray(R.array.vf_products_item_name)
 
     val idx = itemIdArray.indexOf(itemId)
     return itemNameArray[idx]
 }
+
+fun openPlayStore(context: Context) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.packageName)))
+    } catch (ex: Exception) {
+        Toast.makeText(context, "Can not open playstore.", Toast.LENGTH_SHORT).show()
+    }
+}
+
+/**
+ * 충전소 1에 대한 권한 요청
+ */
+val REQUIRE_PERMISSION_FOR_APPALL = arrayOf(android.Manifest.permission.READ_PHONE_STATE, android.Manifest.permission.GET_ACCOUNTS)
+val REQUEST_CODE_PERMISSION_FOR_APPALL = 0xff
+fun grantPermissionForAppAll(activity: CommonActivity) {
+    if(!checkPermissionForAppAll(activity)) {
+        // 권한이 없다면, 요청 합니다.
+        ActivityCompat.requestPermissions(activity, REQUIRE_PERMISSION_FOR_APPALL, REQUEST_CODE_PERMISSION_FOR_APPALL)
+    }
+}
+
+/**
+ * App all SDK 사용을 위함
+ * 권한이 있다면 True
+ * 없다면 False 를 반환한다.
+ */
+fun checkPermissionForAppAll(context: Context) =
+    if(checkAPILevel(Build.VERSION_CODES.M)) {
+        var requestPermission = false
+
+        REQUIRE_PERMISSION_FOR_APPALL.forEachIndexed { _, s ->
+            if (ContextCompat.checkSelfPermission(context, s) == PackageManager.PERMISSION_DENIED) {
+                requestPermission = true
+            }
+        }
+
+        !requestPermission
+    } else true

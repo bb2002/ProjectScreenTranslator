@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -27,7 +30,16 @@ public class TranslateActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
-        getSupportActionBar().hide();
+
+        Toolbar translateToolBar = findViewById(R.id.vf_translate_toolbar);
+        translateToolBar.setTitle(R.string.translate_title);
+        translateToolBar.setNavigationIcon(R.drawable.ic_back_white);
+        translateToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // OCR 처리할 이미지를 불러온다.
         String path = getIntent().getStringExtra("image");

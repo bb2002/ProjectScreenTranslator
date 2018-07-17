@@ -21,6 +21,8 @@ import kr.saintdev.pst.vnc.activity.CommonActivity;
 import kr.saintdev.pst.vnc.dialog.message.DialogManager;
 import kr.saintdev.pst.vnc.dialog.message.OnDialogButtonClickListener;
 
+import static kr.saintdev.pst.models.libs.LibKt.openPlayStore;
+
 /**
  * Copyright (c) 2015-2018 Saint software All rights reserved.
  *
@@ -65,12 +67,7 @@ public class Updater {
         dm.setDialogButtonClickListener(new OnDialogButtonClickListener() {
             @Override
             public void onPositiveClick(DialogInterface dialog, int reqId) {
-                try {
-                    activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + activity.getPackageName())));
-                } catch(Exception ex) {
-                    Toast.makeText(activity, "Can not open playstore.", Toast.LENGTH_SHORT).show();
-                }
-
+                openPlayStore(activity);
                 dialog.dismiss();
             }
 

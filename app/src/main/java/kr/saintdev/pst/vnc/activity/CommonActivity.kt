@@ -8,6 +8,7 @@ import kr.saintdev.pst.vnc.dialog.message.DialogManager
 import kr.saintdev.pst.vnc.dialog.message.OnDialogButtonClickListener
 import kr.saintdev.pst.vnc.dialog.progress.ProgressManager
 import libs.mjn.prettydialog.PrettyDialog
+import libs.mjn.prettydialog.PrettyDialogCallback
 
 
 /**
@@ -69,7 +70,7 @@ open class CommonActivity : AppCompatActivity() {
     /**
      * Sweet dialog Functions
      */
-    fun openSweetDialog(title: Int, content: Int, type: DialogType) {
+    fun openPrettyDialog(title: Int, content: Int, type: DialogType) {
         val set = getDialogType(type)
 
         PrettyDialog(this)
@@ -80,12 +81,21 @@ open class CommonActivity : AppCompatActivity() {
                 .show()
     }
 
-    fun openCustomIconDialog(title: Int, content: Int, icon: Int) {
+    fun openPrettyConfirmDialog(title: Int, content: Int, type: DialogType, listener: PrettyDialogCallback) {
+        val set = getDialogType(type)
+        val dialog = PrettyDialog(this)
 
-    }
 
-    fun openConfirmDialog(title: Int, content: Int, confirmMsg: Int, type: Int, listener: SweetAlertDialog.OnSweetClickListener) {
-
+        dialog
+                .setTitle(title.str())
+                .setMessage(content.str())
+                .setIcon(set[0])
+                .setIconTint(set[1])
+                .addButton(R.string.common_positive_ok.str(), R.color.pdlg_color_white, R.color.pdlg_color_green, listener)
+                .addButton(R.string.common_negative_no.str(), R.color.pdlg_color_white, R.color.pdlg_color_red) {
+                    dialog.dismiss()
+                }
+        dialog.show()
     }
 
     private fun getDialogType(type: DialogType)
