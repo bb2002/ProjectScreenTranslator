@@ -99,10 +99,7 @@
         <receiver android:name=".models.components.broadcast.ProcedureBroadcastRecv"
             android:enabled="true">
             <intent-filter>
-                <action android:name="kr.saintdev.psct.aos.settings" />
                 <action android:name="kr.saintdev.psct.aos.switch" />
-                <action android:name="kr.saintdev.psct.aos.force_on" />
-                <action android:name="kr.saintdev.psct.aos.force_off" />
             </intent-filter>
         </receiver>
     </application>

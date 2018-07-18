@@ -8,11 +8,10 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.widget.Toast
-import kr.saintdev.pst.models.libs.isScreenTranslaterRunningValue
+import kr.saintdev.pst.models.libs.ScreenTranslate
 import kr.saintdev.pst.models.libs.manager.AlwaysOnNotification
 import kr.saintdev.pst.models.libs.manager.EnvSettingKeys
 import kr.saintdev.pst.models.libs.manager.EnvSettingManager
-import org.jetbrains.anko.sensorManager
 
 /**
  * Copyright (c) 2015-2018 Saint software All rights reserved.
@@ -81,7 +80,7 @@ class ShakeDetectService : Service() {
                         if (SHAKE_THRESHOLD_GRAVITY + powerSize < force) {
                             // 장치가 흔들렸습니다.
                             // 휴대폰 화면이 켜져있는지 확인합니다.
-                            if (!isScreenTranslaterRunningValue(this@ShakeDetectService)) return
+                            if (!ScreenTranslate.isStartScreenTranslate(this@ShakeDetectService)) return
 
                             shakeTime = currectTime
 

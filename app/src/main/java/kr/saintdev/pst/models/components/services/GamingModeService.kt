@@ -1,18 +1,13 @@
 package kr.saintdev.pst.models.components.services
 
 import android.app.Service
-import android.app.Service.START_NOT_STICKY
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.os.Build
-import android.os.Bundle
-import android.os.IBinder
-import android.util.Log
 import android.view.*
 import android.view.WindowManager.LayoutParams.*
 import android.widget.*
-import com.fsn.cauly.*
 import kr.saintdev.pst.R
 import kr.saintdev.pst.models.http.modules.ocr.OCRExecuter
 import kr.saintdev.pst.models.http.modules.ocr.objects.OCRLine
@@ -20,16 +15,14 @@ import kr.saintdev.pst.models.http.modules.ocr.objects.OCRResult
 import kr.saintdev.pst.models.http.modules.translate.TranslateExecuter
 import kr.saintdev.pst.models.http.modules.translate.TranslateIntent
 import kr.saintdev.pst.models.http.modules.translate.TranslateResult
+import kr.saintdev.pst.models.libs.DeviceControl
+import kr.saintdev.pst.models.libs.SystemOverlay
 import kr.saintdev.pst.models.libs.async.BackgroundWork
 import kr.saintdev.pst.models.libs.async.OnBackgroundWorkListener
-import kr.saintdev.pst.models.libs.checkAPILevel
-import kr.saintdev.pst.models.libs.checkSystemOverlayPermisson
 import kr.saintdev.pst.models.libs.manager.EnvSettingKeys
 import kr.saintdev.pst.models.libs.manager.EnvSettingManager
 import kr.saintdev.pst.models.libs.manager.RepositoryKey
 import kr.saintdev.pst.models.libs.manager.RepositoryManager
-import kr.saintdev.pst.vnc.activity.CommonActivity
-import org.jetbrains.anko.image
 import java.io.File
 import java.lang.Exception
 
@@ -58,7 +51,7 @@ class GamingModeService : Service() {
     private val params = WindowManager.LayoutParams(                    // WindowParams
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
-            if(checkAPILevel(Build.VERSION_CODES.O)) TYPE_APPLICATION_OVERLAY else TYPE_PHONE,
+            if(DeviceControl.checkAPILevel(Build.VERSION_CODES.O)) TYPE_APPLICATION_OVERLAY else TYPE_PHONE,
             WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
             PixelFormat.TRANSLUCENT)
     private var cacheImage: String? = null                              // 캐시 이미지
@@ -75,67 +68,68 @@ class GamingModeService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        if(checkSystemOverlayPermisson(this)) {
-            this.wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        this.wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val v = inflater.inflate(R.layout.overlay_gaming_view, null, false) // 메인 뷰를 가져온다.
-            this.controllerView = ControllerView(this)          // 컨트롤러 뷰를 불러온다.
-            this.supportLanguageCodes = resources.getStringArray(R.array.supported_languages_v2_codes)
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val v = inflater.inflate(R.layout.overlay_gaming_view, null, false) // 메인 뷰를 가져온다.
+        this.controllerView = ControllerView(this)          // 컨트롤러 뷰를 불러온다.
+        this.supportLanguageCodes = resources.getStringArray(R.array.supported_languages_v2_codes)
 
-            if (v != null) {
-                this.backgroundImage = v.findViewById(R.id.gaming_background_image)
-                this.logcatView = v.findViewById(R.id.gaming_logcat)
-                this.inputSpinner = controllerView?.findViewById(R.id.gaming_input_spinner)
-                this.outputSpinner = controllerView?.findViewById(R.id.gaming_output_spinner)
-                this.overlayContainer = v.findViewById(R.id.gaming_overlay_container)
+        if (v != null) {
+            this.backgroundImage = v.findViewById(R.id.gaming_background_image)
+            this.logcatView = v.findViewById(R.id.gaming_logcat)
+            this.inputSpinner = controllerView?.findViewById(R.id.gaming_input_spinner)
+            this.outputSpinner = controllerView?.findViewById(R.id.gaming_output_spinner)
+            this.overlayContainer = v.findViewById(R.id.gaming_overlay_container)
 
-                this.view = v
+            this.view = v
 
-                // WindowManager 에 추가합니다.
-                this.wm?.addView(this.view, params)
-                this.wm?.addView(this.controllerView, params)
-            }
+            // WindowManager 에 추가합니다.
+            this.wm?.addView(this.view, params)
+            this.wm?.addView(this.controllerView, params)
+        }
 
-            this.inputLanguageIndex = repoManager.getHashValue(RepositoryKey.INPUT_LANGUAGE)!!.toInt()
-            this.outputLanguageIndex = repoManager.getHashValue(RepositoryKey.OUTPUT_LANGUAGE)!!.toInt()
+        this.inputLanguageIndex = repoManager.getHashValue(RepositoryKey.INPUT_LANGUAGE)!!.toInt()
+        this.outputLanguageIndex = repoManager.getHashValue(RepositoryKey.OUTPUT_LANGUAGE)!!.toInt()
 
-            // Spinner
-            val adapter = ArrayAdapter.createFromResource(this, R.array.supported_languages_v2_names, android.R.layout.simple_spinner_dropdown_item)
-            if (inputSpinner != null && outputSpinner != null) {
-                inputSpinner!!.adapter = adapter
-                outputSpinner!!.adapter = adapter
-                inputSpinner!!.setSelection(inputLanguageIndex, false)
-                outputSpinner!!.setSelection(outputLanguageIndex, false)
-                inputSpinner!!.onItemSelectedListener = onInputLangaugeSpinnerChangeListener
-                outputSpinner!!.onItemSelectedListener = onOutputLangaugeSpinnerChangeListener
-            }
+        // Spinner
+        val adapter = ArrayAdapter.createFromResource(this, R.array.supported_languages_v2_names, android.R.layout.simple_spinner_dropdown_item)
+        if (inputSpinner != null && outputSpinner != null) {
+            inputSpinner!!.adapter = adapter
+            outputSpinner!!.adapter = adapter
+            inputSpinner!!.setSelection(inputLanguageIndex, false)
+            outputSpinner!!.setSelection(outputLanguageIndex, false)
+            inputSpinner!!.onItemSelectedListener = onInputLangaugeSpinnerChangeListener
+            outputSpinner!!.onItemSelectedListener = onOutputLangaugeSpinnerChangeListener
+        }
 
-            // Env setting 을 가져온다.
-            try {
-                val env = EnvSettingManager.getInstance(this)
+        // Env setting 을 가져온다.
+        try {
+            val env = EnvSettingManager.getInstance(this)
 
-                this.overlayBackgroundColor = Color.parseColor(env.read(EnvSettingKeys.GAMING_BG_COLOR))
-                this.overlayTextColor = Color.parseColor(env.read(EnvSettingKeys.GAMING_TEXT_COLOR))
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-        } else {
-            // Overlay 권한이 없다면 강제로 종료 합니다.
-            stopSelf()
+            this.overlayBackgroundColor = Color.parseColor(env.read(EnvSettingKeys.GAMING_BG_COLOR))
+            this.overlayTextColor = Color.parseColor(env.read(EnvSettingKeys.GAMING_TEXT_COLOR))
+        } catch (ex: Exception) {
+            ex.printStackTrace()
         }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if(intent != null) {
-            this.cacheImage = intent.getStringExtra("image")
-            val bitmap = BitmapFactory.decodeFile(cacheImage)
-            this.backgroundImage?.setImageBitmap(bitmap)
+        if(SystemOverlay.isGrantedSystemOverlay(this)) {
+            if (intent != null) {
+                this.cacheImage = intent.getStringExtra("image")
+                val bitmap = BitmapFactory.decodeFile(cacheImage)
+                this.backgroundImage?.setImageBitmap(bitmap)
 
-            // 결과 뷰를 띄웁니다.
-            this.overlayView = OverlayView(this)
-            this.overlayContainer?.addView(this.overlayView)
-            requestOCR()
+                // 결과 뷰를 띄웁니다.
+                this.overlayView = OverlayView(this)
+                this.overlayContainer?.addView(this.overlayView)
+                requestOCR()
+            }
+        } else {
+            // Overlay 권한이 없다면 중지한다.
+            Toast.makeText(this, "Overlay permission is deny.", Toast.LENGTH_SHORT).show()
+            stopSelf()
         }
 
         return START_NOT_STICKY
@@ -229,18 +223,18 @@ class GamingModeService : Service() {
 
         val translateIntent = TranslateIntent(supportLanguageCodes!![outputLanguageIndex])
 
-        if(translateResultData.size > 25) {
-            printLog(R.string.error_msg_translate_v2_gaming_line_overflow.str())
-        } else if(translateResultData.size == 0){
-            printLog(R.string.translate_last_session_error.str())
-        } else {
-            (0 until translateResultData.size)
-                    .map { ocrResultData[it] }
-                    .forEach { translateIntent.addRequestTranslate(supportLanguageCodes!![outputLanguageIndex], it.sentence) }
+        when {
+            translateResultData.size > 25 -> printLog(R.string.error_msg_translate_v2_gaming_line_overflow.str())
+            translateResultData.size == 0 -> printLog(R.string.translate_last_session_error.str())
+            else -> {
+                (0 until translateResultData.size)
+                        .map { ocrResultData[it] }
+                        .forEach { translateIntent.addRequestTranslate(supportLanguageCodes!![outputLanguageIndex], it.sentence) }
 
-            // 번역을 실행한다.
-            val translator = TranslateExecuter(translateIntent, this@GamingModeService, REQUEST_TRANSLATE, onBackgroundTaskCallback)
-            translator.execute()
+                // 번역을 실행한다.
+                val translator = TranslateExecuter(translateIntent, this@GamingModeService, REQUEST_TRANSLATE, onBackgroundTaskCallback)
+                translator.execute()
+            }
         }
     }
 
@@ -257,7 +251,7 @@ class GamingModeService : Service() {
     /**
      * 입력 언어 변경 시 이벤트 리스너
      */
-    val onInputLangaugeSpinnerChangeListener = object : AdapterView.OnItemSelectedListener {
+    private val onInputLangaugeSpinnerChangeListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
         }
@@ -271,7 +265,7 @@ class GamingModeService : Service() {
     /**
      * 출력 언어 변경 시 이벤트 리스너
      */
-    val onOutputLangaugeSpinnerChangeListener = object : AdapterView.OnItemSelectedListener {
+    private val onOutputLangaugeSpinnerChangeListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
         }

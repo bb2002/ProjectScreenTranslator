@@ -19,18 +19,17 @@ import android.os.IBinder;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.OrientationEventListener;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import kr.saintdev.pst.models.libs.LibKt;
+import kr.saintdev.pst.models.libs.MediaProj;
+import kr.saintdev.pst.models.libs.StdFunctionsKt;
 import kr.saintdev.pst.models.libs.manager.AlwaysOnNotification;
 import kr.saintdev.pst.models.libs.manager.EnvSettingKeys;
 import kr.saintdev.pst.models.libs.manager.EnvSettingManager;
@@ -110,7 +109,7 @@ public class DisplayCaptureService extends Service {
         // MediaProjection 정의
         this.projectionMgr = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
 
-        Intent projectionIntent = LibKt.getMediaProjectionIntent();
+        Intent projectionIntent = MediaProj.INSTANCE.getMediaProjectionIntent();
         WindowManager windowMgr = (WindowManager) getSystemService(WINDOW_SERVICE);
 
         if(projectionIntent != null && windowMgr != null) {

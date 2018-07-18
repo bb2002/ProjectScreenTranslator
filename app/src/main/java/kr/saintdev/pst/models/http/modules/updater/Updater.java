@@ -2,9 +2,6 @@ package kr.saintdev.pst.models.http.modules.updater;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -15,13 +12,13 @@ import kr.saintdev.pst.models.consts.version.Versions;
 import kr.saintdev.pst.models.consts.HostKt;
 import kr.saintdev.pst.models.http.HttpRequester;
 import kr.saintdev.pst.models.http.HttpResponseObject;
+import kr.saintdev.pst.models.libs.OpenPreparedActivity;
 import kr.saintdev.pst.models.libs.async.BackgroundWork;
 import kr.saintdev.pst.models.libs.async.OnBackgroundWorkListener;
 import kr.saintdev.pst.vnc.activity.CommonActivity;
 import kr.saintdev.pst.vnc.dialog.message.DialogManager;
 import kr.saintdev.pst.vnc.dialog.message.OnDialogButtonClickListener;
 
-import static kr.saintdev.pst.models.libs.LibKt.openPlayStore;
 
 /**
  * Copyright (c) 2015-2018 Saint software All rights reserved.
@@ -67,7 +64,7 @@ public class Updater {
         dm.setDialogButtonClickListener(new OnDialogButtonClickListener() {
             @Override
             public void onPositiveClick(DialogInterface dialog, int reqId) {
-                openPlayStore(activity);
+                OpenPreparedActivity.INSTANCE.openPlayStore(activity);
                 dialog.dismiss();
             }
 

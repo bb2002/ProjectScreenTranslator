@@ -18,7 +18,8 @@ public class Versions {
         int D_CLOSE_BETA_2 = 401;
         int D_OPEN_BETA_402 = 402;      // Open Beta 4.0.2
         int E_OPEN_BETA_500 = 500;      // Open Beta 5.0.0
-        int E_RELEASE_501 = 501;      // Open Beta 5.0.0
+        int E_RELEASE_501 = 501;      // Release 5.0.1
+        int E_RELEASE_511 = 511;      // Release 5.1.1
     }
 
     /**
@@ -33,7 +34,7 @@ public class Versions {
      * @return 현재 SDK 버전 코드를 리턴합니다.
      */
     public static int getVersionCode() {
-        return SDK_LEVEL.E_RELEASE_501;
+        return SDK_LEVEL.E_RELEASE_511;
     }
 
     /**
@@ -41,6 +42,6 @@ public class Versions {
      * @return 현재 버전 문자열을 리턴합니다.
      */
     public static String getVersionString() {
-        return "Release v5.0.1 - 07.12";
+        return "Release v5.1.1 - 07.18";
     }
 }

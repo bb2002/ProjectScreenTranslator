@@ -81,7 +81,7 @@ open class CommonActivity : AppCompatActivity() {
                 .show()
     }
 
-    fun openPrettyConfirmDialog(title: Int, content: Int, type: DialogType, listener: PrettyDialogCallback) {
+    fun openPrettyConfirmDialog(title: Int, content: Int, type: DialogType, listener: PrettyDialogCallback): PrettyDialog {
         val set = getDialogType(type)
         val dialog = PrettyDialog(this)
 
@@ -96,6 +96,8 @@ open class CommonActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
         dialog.show()
+
+        return dialog
     }
 
     private fun getDialogType(type: DialogType)

@@ -15,10 +15,9 @@ import android.widget.RemoteViews;
 
 import kr.saintdev.pst.R;
 import kr.saintdev.pst.models.components.broadcast.ProcedureBroadcastRecv;
+import kr.saintdev.pst.models.libs.DeviceControl;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static kr.saintdev.pst.models.libs.LibKt.addBroadcastReceiverFilter;
-import static kr.saintdev.pst.models.libs.LibKt.checkAPILevel;
 
 /**
  * Created by 5252b on 2018-04-09
@@ -35,7 +34,6 @@ public class AlwaysOnNotification {
     private Notification notification = null;
     private NotificationManager notifiMgr = null;
 
-    private BroadcastReceiver receiver = null;
     private RemoteViews notificationView = null;
 
     public static AlwaysOnNotification getInstance(Context context) {
@@ -50,9 +48,8 @@ public class AlwaysOnNotification {
         this.context = context;
         this.notifiMgr = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
-        if(checkAPILevel(Build.VERSION_CODES.O)) {
+        if(DeviceControl.INSTANCE.checkAPILevel(Build.VERSION_CODES.O)) {
             initAPI26();
-            addBroadcastReceiverFilter(new ProcedureBroadcastRecv(), context, "kr.saintdev.psct.aos.settings", "kr.saintdev.psct.aos.switch");
         } else {
             initDefault();
         }
@@ -71,6 +68,9 @@ public class AlwaysOnNotification {
 
     @TargetApi(26)
     private void initAPI26() {
+        // Broadcast receiver 등록
+        DeviceControl.INSTANCE.registerBroadcastReceiver(new ProcedureBroadcastRecv(), context, "kr.saintdev.psct.aos.settings", "kr.saintdev.psct.aos.switch");
+
         NotificationChannel notifiChannel = new NotificationChannel(
                 NOTIFI_CHN_TAG + "_ID", NOTIFI_CHN_TAG + "_NAME", android.app.NotificationManager.IMPORTANCE_DEFAULT);
 
