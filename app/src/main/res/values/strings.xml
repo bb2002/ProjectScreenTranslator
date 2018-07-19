@@ -61,8 +61,6 @@
     <string name="translate_last_session_error">번역된 문장이 없거나, 마지막 번역 세션이 잘못되었습니다.</string>
     <string name="translate_auto_not_supported">자동감지를 지원하지 않습니다.</string>
 
-    <!-- Gaming mode overlay -->
-
     <!-- MediaProjection Activity -->
     <string name="mediaproj_content">화면 캡쳐를 위해 권한을 허용해주세요.</string>
     <string name="mediaproj_if_now_show">권한 허용창이 보이지 않으면, 다시 시도를 눌러주세요.</string>
@@ -75,7 +73,6 @@
     <string name="sysoverlay_content_ok">권한이 승인되었습니다.\n이 창을 닫고 계속 작업을 진행하세요.</string>
 
     <!-- 메인 화면 - 홈 -->
-
     <string name="home_power_title">스크린 번역기 서비스</string>
     <string name="home_power_content">서비스를 켜거나 끕니다.</string>
     <string name="home_mode_setting_title">번역 모드 설정</string>
@@ -157,10 +154,10 @@
     <!-- Auth login -->
 
     <!-- Notification -->
-    <string name="notifi_prepared_start_title">스크린 번역기가 준비되었습니다.</string>
-    <string name="notifi_prepared_start_button">시작</string>
-    <string name="notifi_running_title">스크린 번역기가 실행 중 입니다.</string>
-    <string name="notifi_running_button">중지</string>
+    <string name="notifi_prepared_start_title">준비 되었습니다.</string>
+    <string name="notifi_prepared_start_content">시작하려면 여기를 누르세요.</string>
+    <string name="notifi_running_title">실행 중 입니다.</string>
+    <string name="notifi_running_content">중지하려면 여기를 누르세요.</string>
 
     <!-- Entitiy -->
     <string name="entity_progress_ocr">이미지를 분석하고 있습니다.</string>

@@ -1,5 +1,6 @@
 package kr.saintdev.pst.vnc.activity.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -10,6 +11,7 @@ import com.daimajia.swipe.SwipeLayout
 import com.kyad.adlibrary.AppAllOfferwallSDK
 import kotlinx.android.synthetic.main.vf_activity_main.*
 import kr.saintdev.pst.R
+import kr.saintdev.pst.models.components.services.AlwaysOnService
 import kr.saintdev.pst.models.http.HttpResponseObject
 import kr.saintdev.pst.models.http.PREPARED_REQUEST_DEFINE_INODE_UPDATER
 import kr.saintdev.pst.models.http.modules.updater.Updater
@@ -97,11 +99,20 @@ class MainActivity : CommonActivity(), NavigationView.OnNavigationItemSelectedLi
             // Always On Notification 을 시작한다.
             AlwaysOnNotifi.startAlwaysOnNotificationService(this)
 
+            // Always on notifiction sync service
+            val service = Intent(this, AlwaysOnService::class.java)
+            startService(service)
+
             // 스크린 번역기 상태를 버튼으로 표시한다.
             control.updateServicePowerView(ScreenTranslate.isProcedureServiceRunning(this))
             control.displayNowSettings()        // 현재 상태값 업데이트
             control.displayProfileData()        // 프로필 업데이트
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -106,18 +106,11 @@ object ScreenTranslate {
 object AlwaysOnNotifi {
     /**
      * @param context Context
-     * Always on notification 이 실행중인지 확인한다. (실행중 : true)
-     */
-    fun isAlwaysOnNotificationRunning(context: Context) =
-            DeviceControl.isServiceRunning(context, AlwaysOnService::class.java)
-
-    /**
-     * @param context Context
      * Always on notification service 를 시작한다.
      */
     fun startAlwaysOnNotificationService(context: Context) {
-        if(isAlwaysOnNotificationRunning(context))
-            context.startService(Intent(context, AlwaysOnService::class.java))
+        var notifiManager = AlwaysOnNotification.getInstance(context)
+        notifiManager.show()
     }
 
     /**

@@ -15,7 +15,9 @@ import android.widget.RemoteViews;
 
 import kr.saintdev.pst.R;
 import kr.saintdev.pst.models.components.broadcast.ProcedureBroadcastRecv;
+import kr.saintdev.pst.models.components.services.AlwaysOnService;
 import kr.saintdev.pst.models.libs.DeviceControl;
+import kr.saintdev.pst.vnc.activity.view.MainActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -35,6 +37,7 @@ public class AlwaysOnNotification {
     private NotificationManager notifiMgr = null;
 
     private RemoteViews notificationView = null;
+    private ProcedureBroadcastRecv receiver = new ProcedureBroadcastRecv();
 
     public static AlwaysOnNotification getInstance(Context context) {
         if(AlwaysOnNotification.instance == null) {
@@ -54,23 +57,17 @@ public class AlwaysOnNotification {
             initDefault();
         }
 
-        this.notificationView = new RemoteViews(context.getPackageName(), R.layout.notification_aos);
-        this.notificationView.setTextViewText(R.id.notifi_aos_title, context.getString(R.string.notifi_prepared_start_title));
-        this.notificationView.setOnClickPendingIntent(R.id.notifi_aos_rightbtn_text, getPendingIntent(context, "kr.saintdev.psct.aos.settings"));
-        this.notificationView.setOnClickPendingIntent(R.id.notifi_aos_leftbtn_text, getPendingIntent(context, "kr.saintdev.psct.aos.switch"));
-
         this.builder
                 .setSmallIcon(R.drawable.app_icon)
                 .setContent(this.notificationView)
-                .setDefaults(Notification.DEFAULT_LIGHTS)
+                .setContentIntent(getPendingIntent())
                 .setAutoCancel(true);
+
+        setStatus(NotificationStatus.PREPARED);
     }
 
     @TargetApi(26)
-    private void initAPI26() {
-        // Broadcast receiver 등록
-        DeviceControl.INSTANCE.registerBroadcastReceiver(new ProcedureBroadcastRecv(), context, "kr.saintdev.psct.aos.settings", "kr.saintdev.psct.aos.switch");
-
+    private void initAPI26() {        // api 26 이상에서는 receiver 를 등록합니다.
         NotificationChannel notifiChannel = new NotificationChannel(
                 NOTIFI_CHN_TAG + "_ID", NOTIFI_CHN_TAG + "_NAME", android.app.NotificationManager.IMPORTANCE_DEFAULT);
 
@@ -100,25 +97,33 @@ public class AlwaysOnNotification {
         return this.notification;
     }
 
+    public Context getContext() {
+        return this.context;
+    }
+
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        return PendingIntent.getActivity(this.context, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
     public void setStatus(NotificationStatus status) {
         switch(status) {
             case RUNNING:
-                this.notificationView.setTextViewText(R.id.notifi_aos_title, context.getString(R.string.notifi_running_title));
-                this.notificationView.setTextViewText(R.id.notifi_aos_leftbtn_text, context.getString(R.string.notifi_running_button));
-                this.notificationView.setImageViewBitmap(R.id.notifi_aos_leftbtn_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_stop_black));
+                builder.setContentTitle(this.context.getString(R.string.notifi_running_title))
+                        .setContentText(this.context.getString(R.string.notifi_running_content))
+                        .setLargeIcon(BitmapFactory.decodeResource(this.context.getResources(), R.drawable.icon_stop_black));
                 break;
             case PREPARED:
-                this.notificationView.setTextViewText(R.id.notifi_aos_title, context.getString(R.string.notifi_prepared_start_title));
-                this.notificationView.setTextViewText(R.id.notifi_aos_leftbtn_text, context.getString(R.string.notifi_prepared_start_button));
-                this.notificationView.setImageViewBitmap(R.id.notifi_aos_leftbtn_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_play_black));
+                builder.setContentTitle(this.context.getString(R.string.notifi_prepared_start_title))
+                        .setContentText(this.context.getString(R.string.notifi_prepared_start_content))
+                        .setLargeIcon(BitmapFactory.decodeResource(this.context.getResources(), R.drawable.icon_start_black));
                 break;
         }
+
+        show();
     }
 
-    private PendingIntent getPendingIntent(Context context, String action) {
-        Intent intent = new Intent(action);
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
 
     public enum NotificationStatus {
         PREPARED,   // 준비 됨

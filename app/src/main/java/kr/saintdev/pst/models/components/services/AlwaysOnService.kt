@@ -4,6 +4,8 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import kr.saintdev.pst.models.components.broadcast.ProcedureBroadcastRecv
+import kr.saintdev.pst.models.libs.DeviceControl
 import kr.saintdev.pst.models.libs.manager.AlwaysOnNotification
 
 /**
@@ -11,22 +13,19 @@ import kr.saintdev.pst.models.libs.manager.AlwaysOnNotification
  * @Date 2018-07-03
  */
 class AlwaysOnService : Service() {
+    private lateinit var notifiManager: AlwaysOnNotification
+
     override fun onCreate() {
         super.onCreate()
+        this.notifiManager = AlwaysOnNotification.getInstance(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val notifiManager = AlwaysOnNotification.getInstance(this)
-        startForeground(AlwaysOnNotification.NOTIFI_ID, notifiManager.show())
+        // Start foreground
+        startForeground(AlwaysOnNotification.NOTIFI_ID, this.notifiManager.notification)
 
         return START_STICKY
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onBind(intent: Intent?): IBinder? = null
 }
-
-fun getAlwaysOnIntent(context: Context) = Intent(context, AlwaysOnService::class.java)
