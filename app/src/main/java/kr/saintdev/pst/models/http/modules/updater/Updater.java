@@ -16,8 +16,10 @@ import kr.saintdev.pst.models.libs.OpenPreparedActivity;
 import kr.saintdev.pst.models.libs.async.BackgroundWork;
 import kr.saintdev.pst.models.libs.async.OnBackgroundWorkListener;
 import kr.saintdev.pst.vnc.activity.CommonActivity;
+import kr.saintdev.pst.vnc.activity.DialogType;
 import kr.saintdev.pst.vnc.dialog.message.DialogManager;
 import kr.saintdev.pst.vnc.dialog.message.OnDialogButtonClickListener;
+import libs.mjn.prettydialog.PrettyDialogCallback;
 
 
 /**
@@ -58,25 +60,16 @@ public class Updater {
     }
 
     public static void openUpdateDialog(final CommonActivity activity, int newVersion) {
-        DialogManager dm = new DialogManager(activity);
-        dm.setTitle(activity.getString(R.string.updater_need_update_title));
-        dm.setDescription(activity.getString(R.string.updater_need_update_content) + "\nNew SDK code : " + newVersion);
-        dm.setDialogButtonClickListener(new OnDialogButtonClickListener() {
-            @Override
-            public void onPositiveClick(DialogInterface dialog, int reqId) {
-                OpenPreparedActivity.INSTANCE.openPlayStore(activity);
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onNegativeClick(DialogInterface dialog, int reqId) {
-                dialog.dismiss();
-            }
-        });
-
-        dm.setOnYesButtonClickListener(activity.getString(R.string.common_positive_ok));
-        dm.setOnNoButtonClickListener(activity.getString(R.string.common_negative_ignore));
-        dm.show();
+        activity.openPrettyConfirmDialog(
+                R.string.updater_need_update_title,
+                R.string.updater_need_update_content,
+                DialogType.WARNING,
+                new PrettyDialogCallback() {
+                    @Override
+                    public void onClick() {
+                        OpenPreparedActivity.INSTANCE.openPlayStore(activity);
+                    }
+                });
     }
 
     private static class OnBackgroundCallback implements OnBackgroundWorkListener {

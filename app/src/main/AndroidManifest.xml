@@ -70,6 +70,12 @@
         <activity android:name=".vnc.activity.view.FreeChargeLogActivity"
             android:enabled="true"
             android:screenOrientation="portrait"/>
+        <!-- 노티피케이션 뷰는 스택에 남지 않도록 07.20 -->
+        <activity android:name=".vnc.activity.view.NotificationActivity"
+            android:enabled="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:noHistory="true"/>
 
         <activity
             android:name="com.kyad.adlibrary.AppAllOfferwallActivity"

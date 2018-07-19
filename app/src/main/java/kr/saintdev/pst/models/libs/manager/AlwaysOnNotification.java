@@ -18,6 +18,7 @@ import kr.saintdev.pst.models.components.broadcast.ProcedureBroadcastRecv;
 import kr.saintdev.pst.models.components.services.AlwaysOnService;
 import kr.saintdev.pst.models.libs.DeviceControl;
 import kr.saintdev.pst.vnc.activity.view.MainActivity;
+import kr.saintdev.pst.vnc.activity.view.NotificationActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -37,7 +38,6 @@ public class AlwaysOnNotification {
     private NotificationManager notifiMgr = null;
 
     private RemoteViews notificationView = null;
-    private ProcedureBroadcastRecv receiver = new ProcedureBroadcastRecv();
 
     public static AlwaysOnNotification getInstance(Context context) {
         if(AlwaysOnNotification.instance == null) {
@@ -69,7 +69,7 @@ public class AlwaysOnNotification {
     @TargetApi(26)
     private void initAPI26() {        // api 26 이상에서는 receiver 를 등록합니다.
         NotificationChannel notifiChannel = new NotificationChannel(
-                NOTIFI_CHN_TAG + "_ID", NOTIFI_CHN_TAG + "_NAME", android.app.NotificationManager.IMPORTANCE_DEFAULT);
+                NOTIFI_CHN_TAG + "_ID", NOTIFI_CHN_TAG + "_NAME", NotificationManager.IMPORTANCE_DEFAULT);
 
         notifiChannel.setDescription("Screentranslate Alarm channel");
         notifiChannel.enableLights(false);
@@ -102,7 +102,7 @@ public class AlwaysOnNotification {
     }
 
     private PendingIntent getPendingIntent() {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getActivity(this.context, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT);
     }

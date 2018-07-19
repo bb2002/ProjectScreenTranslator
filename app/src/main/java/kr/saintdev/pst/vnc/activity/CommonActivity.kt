@@ -70,15 +70,16 @@ open class CommonActivity : AppCompatActivity() {
     /**
      * Sweet dialog Functions
      */
-    fun openPrettyDialog(title: Int, content: Int, type: DialogType) {
+    fun openPrettyDialog(title: Int, content: Int, type: DialogType): PrettyDialog {
         val set = getDialogType(type)
 
-        PrettyDialog(this)
+        val dialog = PrettyDialog(this)
                 .setTitle(title.str())
                 .setMessage(content.str())
                 .setIconTint(set[1])
                 .setIcon(set[0])
-                .show()
+        dialog.show()
+        return dialog
     }
 
     fun openPrettyConfirmDialog(title: Int, content: Int, type: DialogType, listener: PrettyDialogCallback): PrettyDialog {

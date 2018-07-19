@@ -149,9 +149,10 @@
     <string name="about_dev_info">개발 정보</string>
     <string name="abount_dev_copyright">&#169; 2015&#8211;2018 Saint software All rights reserved.</string>
 
-    <!-- 설정 프래그먼트 -->
-
-    <!-- Auth login -->
+    <!-- Notification Activity -->
+    <string name="notifi_activity_title">적용되었습니다.</string>
+    <string name="notifi_activity_running">스크린 번역기가 시작 되었습니다.</string>
+    <string name="notifi_activity_stopping">스크린 번역기가 중지 되었습니다.</string>
 
     <!-- Notification -->
     <string name="notifi_prepared_start_title">준비 되었습니다.</string>
@@ -329,4 +330,5 @@
 
     <string name="license_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1o656yj046nVR4VouzHwAGyapG+HYR4rYJUkCGqIxgNxMT8UP1VjdcnSjucs1Eq/bFLaqPWzk0SO0K+CfQhslDqzQOYePnbtC50x37QPYOaYru6tXUId/8y7Zaf4RiAm38tdAZ07GSGqJ9CTMJWyUrbKWCoSxwr5PArvlL2kBL3H3vrhTU9aHO3xKygjhWJKhS7CMzEirnMvGPEe6rkjNGtl0ITMioqWlYgWbracIuUIGArFCscf0I/3Pr5ByNePnpmvQnU4xwWKdiIsOBWNou+ciOGT/Zq9oO7+W92QAB+T4rG+kPFfo5/O3XE9vfl3EU9/E18KR+YItJpgd8y6WwIDAQAB</string>
     <string name="appall_key">b59b080ae11d3637dfe7ef8b4650ba49ea2bce95</string>
+    <string name="cauly_key">B3HJts0y</string>
 </resources>

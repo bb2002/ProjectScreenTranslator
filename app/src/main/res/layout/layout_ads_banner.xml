@@ -6,7 +6,7 @@
         android:id="@+id/ads"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:appcode="CAULY"
+        app:appcode="B3HJts0y"
         app:effect="FadeIn"
         app:dynamicReloadInterval="true"
         app:reloadInterval="30"
