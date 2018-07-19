@@ -8,8 +8,8 @@ android {
         applicationId "kr.saintdev.pst"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 512
-        versionName "Eli ayase Release v5.1.2 - 07.20"
+        versionCode 513
+        versionName "Eli ayase Release v5.1.3 - 07.20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
