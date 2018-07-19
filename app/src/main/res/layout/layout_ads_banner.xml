@@ -11,4 +11,5 @@
         app:dynamicReloadInterval="true"
         app:reloadInterval="30"
         app:bannerHeight="Fixed_50" />
+
 </RelativeLayout>
